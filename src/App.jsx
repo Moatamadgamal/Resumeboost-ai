@@ -3,9 +3,6 @@ import { translations } from "./i18n";
 import { applyTheme, getInitialTheme } from "./theme";
 
 import Navbar from "./components/Navbar";
-import TestAuth from "./components/TestAuth";
-<TestAuth />
-
 import AuthModal from "./components/AuthModal";
 
 import Hero from "./components/Hero";
@@ -13,8 +10,6 @@ import TryIt from "./components/TryIt";
 import Features from "./components/Features";
 import CTA from "./components/CTA";
 import Footer from "./components/Footer";
-import { auth } from "./firebase";
-console.log("Firebase Auth:", auth);
 
 export default function App() {
   const [lang, setLang] = useState("en");
@@ -50,6 +45,7 @@ export default function App() {
         initialTab={authTab}
         onClose={() => setAuthOpen(false)}
         onAuth={(session) => setUser(session)}
+        t={t}
       />
 
       <Hero t={t} />

@@ -1,7 +1,6 @@
 export const translations = {
   en: {
     // ================= NAV =================
-   
     nav_try: "Try it",
     nav_how: "How it works",
     nav_build: "Build my CV",
@@ -11,7 +10,6 @@ export const translations = {
     nav_signup: "Create account",
     nav_logout: "Logout",
     nav_hi: "Hi",
-
 
     // ================= HERO =================
     hero_pill: "Practical AI for your career",
@@ -166,19 +164,61 @@ export const translations = {
 
     footer_rights: "ResumeBoost AI. All rights reserved.",
     footer_made: "Made with React + Vite",
+
+    // ================= AUTH MODAL =================
+    dir: "ltr",
+    auth_sub: "Sign in to save your progress.",
+    auth_close: "Close",
+
+    auth_login_title: "Sign in",
+    auth_signup_title: "Create account",
+
+    auth_name: "Full name",
+    auth_email: "Email",
+    auth_password: "Password",
+    auth_confirm: "Confirm password",
+
+    auth_name_ph: "Mohamed Ali",
+    auth_email_ph: "name@email.com",
+    auth_password_ph: "••••••••",
+    auth_password_hint: "At least 6 characters",
+    auth_confirm_ph: "Repeat password",
+
+    auth_login_btn: "Sign in",
+    auth_signup_btn: "Create account",
+
+    auth_no_account: "Don’t have an account?",
+    auth_create_one: "Create one",
+    auth_have_account: "Already have an account?",
+
+    auth_ok_login: "Signed in successfully.",
+    auth_ok_signup: "Account created successfully.",
+
+    auth_err_enter_email: "Please enter your email.",
+    auth_err_enter_pass: "Please enter your password.",
+    auth_err_enter_name: "Please enter your name.",
+    auth_err_invalid_email: "Please enter a valid email.",
+    auth_err_weak_pass: "Password must be at least 6 characters.",
+    auth_err_pass_mismatch: "Passwords do not match.",
+
+    auth_err_email_used: "This email is already in use.",
+    auth_err_user_not_found: "Account not found. Create an account first.",
+    auth_err_wrong_pass: "Wrong password.",
+    auth_err_invalid_cred: "Wrong email or password.",
+    auth_err_generic: "Something went wrong. Please try again.",
   },
 
   ar: {
     // ================= NAV =================
-        nav_try: "جرّب الآن",
-        nav_how: "كيف تعمل",
-        nav_build: "ابدأ السيرة",
+    nav_try: "جرّب الآن",
+    nav_how: "كيف تعمل",
+    nav_build: "ابدأ السيرة",
 
-        // Auth (Navbar)
-        nav_signin: "تسجيل الدخول",
-        nav_signup: "إنشاء حساب",
-        nav_logout: "تسجيل الخروج",
-        nav_hi: "أهلًا",
+    // Auth (Navbar)
+    nav_signin: "تسجيل الدخول",
+    nav_signup: "إنشاء حساب",
+    nav_logout: "تسجيل الخروج",
+    nav_hi: "أهلًا",
 
     // ================= HERO =================
     hero_pill: "ذكاء عملي لمسارك المهني",
@@ -268,23 +308,19 @@ export const translations = {
 
     features_3_icon: "🧩",
     features_3_title: "تنسيق واضح",
-    features_3_text:
-      "تنظيم نظيف يوضح خبراتك بشكل احترافي وسهل.",
+    features_3_text: "تنظيم نظيف يوضح خبراتك بشكل احترافي وسهل.",
 
     features_4_icon: "📝",
     features_4_title: "تحسين النقاط",
-    features_4_text:
-      "حوّل المهام العادية إلى إنجازات مؤثرة بالأرقام.",
+    features_4_text: "حوّل المهام العادية إلى إنجازات مؤثرة بالأرقام.",
 
     features_5_icon: "🔁",
     features_5_title: "تجربة سريعة",
-    features_5_text:
-      "جرّب أكثر من نبرة وإصدار لحد ما توصل لأفضل نتيجة.",
+    features_5_text: "جرّب أكثر من نبرة وإصدار لحد ما توصل لأفضل نتيجة.",
 
     features_6_icon: "✅",
     features_6_title: "خطوة واضحة",
-    features_6_text:
-      "الصفحة دايمًا بتوجّه المستخدم لخطوة واحدة: إنشاء السيرة الآن.",
+    features_6_text: "الصفحة دايمًا بتوجّه المستخدم لخطوة واحدة: إنشاء السيرة الآن.",
 
     features_btn_primary: "أنشئ سيرتي",
     features_btn_secondary: "عدّل الاختيارات",
@@ -333,5 +369,47 @@ export const translations = {
 
     footer_rights: "جميع الحقوق محفوظة.",
     footer_made: "مصنوع باستخدام React و Vite",
+
+    // ================= AUTH MODAL =================
+    dir: "rtl",
+    auth_sub: "سجّل دخولك لحفظ التقدّم.",
+    auth_close: "إغلاق",
+
+    auth_login_title: "تسجيل الدخول",
+    auth_signup_title: "إنشاء حساب",
+
+    auth_name: "الاسم بالكامل",
+    auth_email: "البريد الإلكتروني",
+    auth_password: "كلمة المرور",
+    auth_confirm: "تأكيد كلمة المرور",
+
+    auth_name_ph: "محمد علي",
+    auth_email_ph: "name@email.com",
+    auth_password_ph: "••••••••",
+    auth_password_hint: "على الأقل 6 أحرف",
+    auth_confirm_ph: "أعد كتابة كلمة المرور",
+
+    auth_login_btn: "دخول",
+    auth_signup_btn: "إنشاء حساب",
+
+    auth_no_account: "مفيش حساب؟",
+    auth_create_one: "اعمل حساب",
+    auth_have_account: "عندك حساب؟",
+
+    auth_ok_login: "تم تسجيل الدخول بنجاح.",
+    auth_ok_signup: "تم إنشاء الحساب بنجاح.",
+
+    auth_err_enter_email: "من فضلك اكتب الإيميل.",
+    auth_err_enter_pass: "من فضلك اكتب كلمة المرور.",
+    auth_err_enter_name: "من فضلك اكتب اسمك.",
+    auth_err_invalid_email: "من فضلك اكتب إيميل صحيح.",
+    auth_err_weak_pass: "كلمة المرور لازم تكون 6 أحرف على الأقل.",
+    auth_err_pass_mismatch: "كلمتا المرور غير متطابقتين.",
+
+    auth_err_email_used: "الإيميل ده مستخدم بالفعل.",
+    auth_err_user_not_found: "الحساب غير موجود. اعمل حساب الأول.",
+    auth_err_wrong_pass: "كلمة المرور غلط.",
+    auth_err_invalid_cred: "الإيميل أو كلمة المرور غلط.",
+    auth_err_generic: "حصلت مشكلة. حاول تاني.",
   },
 };

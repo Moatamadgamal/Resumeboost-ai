@@ -7,7 +7,9 @@ import {
   updateProfile,
 } from "firebase/auth";
 
-export default function AuthModal({ open, initialTab = "login", onClose, onAuth }) {
+export default function AuthModal({ open, initialTab = "login", onClose, onAuth, t }) {
+  const get = (key, fallback) => (t && t[key]) || fallback;
+
   const [tab, setTab] = useState(initialTab); // login | signup
 
   // login
@@ -58,13 +60,19 @@ export default function AuthModal({ open, initialTab = "login", onClose, onAuth 
 
   function friendlyError(err) {
     const code = err?.code || "";
-    if (code.includes("auth/email-already-in-use")) return "This email is already in use.";
-    if (code.includes("auth/invalid-email")) return "Please enter a valid email.";
-    if (code.includes("auth/weak-password")) return "Password must be at least 6 characters.";
-    if (code.includes("auth/user-not-found")) return "Account not found. Create an account first.";
-    if (code.includes("auth/wrong-password")) return "Wrong password.";
-    if (code.includes("auth/invalid-credential")) return "Wrong email or password.";
-    return "Something went wrong. Please try again.";
+    if (code.includes("auth/email-already-in-use"))
+      return get("auth_err_email_used", "This email is already in use.");
+    if (code.includes("auth/invalid-email"))
+      return get("auth_err_invalid_email", "Please enter a valid email.");
+    if (code.includes("auth/weak-password"))
+      return get("auth_err_weak_pass", "Password must be at least 6 characters.");
+    if (code.includes("auth/user-not-found"))
+      return get("auth_err_user_not_found", "Account not found. Create an account first.");
+    if (code.includes("auth/wrong-password"))
+      return get("auth_err_wrong_pass", "Wrong password.");
+    if (code.includes("auth/invalid-credential"))
+      return get("auth_err_invalid_cred", "Wrong email or password.");
+    return get("auth_err_generic", "Something went wrong. Please try again.");
   }
 
   async function handleLogin(e) {
@@ -72,12 +80,12 @@ export default function AuthModal({ open, initialTab = "login", onClose, onAuth 
     setMsg({ type: "", text: "" });
 
     const email = loginEmail.trim();
-    if (!email) return toast("error", "Please enter your email.");
-    if (!loginPass) return toast("error", "Please enter your password.");
+    if (!email) return toast("error", get("auth_err_enter_email", "Please enter your email."));
+    if (!loginPass) return toast("error", get("auth_err_enter_pass", "Please enter your password."));
 
     try {
       const res = await signInWithEmailAndPassword(auth, email, loginPass);
-      toast("success", "Signed in successfully.");
+      toast("success", get("auth_ok_login", "Signed in successfully."));
 
       onAuth?.({
         uid: res.user.uid,
@@ -98,10 +106,13 @@ export default function AuthModal({ open, initialTab = "login", onClose, onAuth 
     const fullName = name.trim();
     const email = signEmail.trim();
 
-    if (fullName.length < 2) return toast("error", "Please enter your name.");
-    if (!email) return toast("error", "Please enter a valid email.");
-    if (signPass.length < 6) return toast("error", "Password must be at least 6 characters.");
-    if (signPass !== signPass2) return toast("error", "Passwords do not match.");
+    if (fullName.length < 2)
+      return toast("error", get("auth_err_enter_name", "Please enter your name."));
+    if (!email) return toast("error", get("auth_err_invalid_email", "Please enter a valid email."));
+    if (signPass.length < 6)
+      return toast("error", get("auth_err_weak_pass", "Password must be at least 6 characters."));
+    if (signPass !== signPass2)
+      return toast("error", get("auth_err_pass_mismatch", "Passwords do not match."));
 
     try {
       const res = await createUserWithEmailAndPassword(auth, email, signPass);
@@ -109,7 +120,7 @@ export default function AuthModal({ open, initialTab = "login", onClose, onAuth 
       // set displayName
       await updateProfile(res.user, { displayName: fullName });
 
-      toast("success", "Account created successfully.");
+      toast("success", get("auth_ok_signup", "Account created successfully."));
 
       onAuth?.({
         uid: res.user.uid,
@@ -123,8 +134,16 @@ export default function AuthModal({ open, initialTab = "login", onClose, onAuth 
     }
   }
 
+  const dir = get("dir", "ltr");
+
   return (
-    <div className="modal-overlay" onMouseDown={onOverlayClick} role="dialog" aria-modal="true">
+    <div
+      className="modal-overlay"
+      onMouseDown={onOverlayClick}
+      role="dialog"
+      aria-modal="true"
+      dir={dir}
+    >
       <div className="modal">
         <div className="modal-top">
           <div className="modal-title">
@@ -132,10 +151,10 @@ export default function AuthModal({ open, initialTab = "login", onClose, onAuth 
               <span className="logo-dot" />
               <span>ResumeBoost AI</span>
             </div>
-            <p className="modal-sub">Sign in to save your progress.</p>
+            <p className="modal-sub">{get("auth_sub", "Sign in to save your progress.")}</p>
           </div>
 
-          <button className="modal-x" type="button" onClick={onClose} aria-label="Close">
+          <button className="modal-x" type="button" onClick={onClose} aria-label={get("auth_close", "Close")}>
             ✕
           </button>
         </div>
@@ -149,7 +168,7 @@ export default function AuthModal({ open, initialTab = "login", onClose, onAuth 
               setMsg({ type: "", text: "" });
             }}
           >
-            Sign in
+            {get("auth_login_title", "Sign in")}
           </button>
 
           <button
@@ -160,7 +179,7 @@ export default function AuthModal({ open, initialTab = "login", onClose, onAuth 
               setMsg({ type: "", text: "" });
             }}
           >
-            Create account
+            {get("auth_signup_title", "Create account")}
           </button>
         </div>
 
@@ -170,86 +189,86 @@ export default function AuthModal({ open, initialTab = "login", onClose, onAuth 
 
         {tab === "login" ? (
           <form className="modal-form" onSubmit={handleLogin}>
-            <label className="label">Email</label>
+            <label className="label">{get("auth_email", "Email")}</label>
             <input
               className="input"
               type="email"
               value={loginEmail}
               onChange={(e) => setLoginEmail(e.target.value)}
-              placeholder="name@email.com"
+              placeholder={get("auth_email_ph", "name@email.com")}
               autoComplete="email"
             />
 
-            <label className="label">Password</label>
+            <label className="label">{get("auth_password", "Password")}</label>
             <input
               className="input"
               type="password"
               value={loginPass}
               onChange={(e) => setLoginPass(e.target.value)}
-              placeholder="••••••••"
+              placeholder={get("auth_password_ph", "••••••••")}
               autoComplete="current-password"
             />
 
             <button className="btn btn-primary w100" type="submit">
-              Sign in
+              {get("auth_login_btn", "Sign in")}
             </button>
 
             <p className="modal-mini">
-              Don’t have an account?{" "}
+              {get("auth_no_account", "Don’t have an account?")}{" "}
               <button type="button" className="link-btn" onClick={() => setTab("signup")}>
-                Create one
+                {get("auth_create_one", "Create one")}
               </button>
             </p>
           </form>
         ) : (
           <form className="modal-form" onSubmit={handleSignup}>
-            <label className="label">Full name</label>
+            <label className="label">{get("auth_name", "Full name")}</label>
             <input
               className="input"
               value={name}
               onChange={(e) => setName(e.target.value)}
-              placeholder="Mohamed Ali"
+              placeholder={get("auth_name_ph", "Mohamed Ali")}
               autoComplete="name"
             />
 
-            <label className="label">Email</label>
+            <label className="label">{get("auth_email", "Email")}</label>
             <input
               className="input"
               type="email"
               value={signEmail}
               onChange={(e) => setSignEmail(e.target.value)}
-              placeholder="name@email.com"
+              placeholder={get("auth_email_ph", "name@email.com")}
               autoComplete="email"
             />
 
-            <label className="label">Password</label>
+            <label className="label">{get("auth_password", "Password")}</label>
             <input
               className="input"
               type="password"
               value={signPass}
               onChange={(e) => setSignPass(e.target.value)}
-              placeholder="At least 6 characters"
+              placeholder={get("auth_password_hint", "At least 6 characters")}
               autoComplete="new-password"
             />
 
-            <label className="label">Confirm password</label>
+            <label className="label">{get("auth_confirm", "Confirm password")}</label>
             <input
               className="input"
               type="password"
               value={signPass2}
               onChange={(e) => setSignPass2(e.target.value)}
-              placeholder="Repeat password"
+              placeholder={get("auth_confirm_ph", "Repeat password")}
               autoComplete="new-password"
             />
 
             <button className="btn btn-primary w100" type="submit">
-              Create account
+              {get("auth_signup_btn", "Create account")}
             </button>
 
             <p className="modal-mini">
-              Already have an account?{" "}
+              {get("auth_have_account", "Already have an account?")}{" "}
               <button type="button" className="link-btn" onClick={() => setTab("login")}>
-                Sign in
+                {get("auth_login_title", "Sign in")}
               </button>
             </p>
           </form>
