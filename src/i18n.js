@@ -1,9 +1,17 @@
 export const translations = {
   en: {
     // ================= NAV =================
+   
     nav_try: "Try it",
     nav_how: "How it works",
     nav_build: "Build my CV",
+
+    // Auth (Navbar)
+    nav_signin: "Sign in",
+    nav_signup: "Create account",
+    nav_logout: "Logout",
+    nav_hi: "Hi",
+
 
     // ================= HERO =================
     hero_pill: "Practical AI for your career",
@@ -162,9 +170,15 @@ export const translations = {
 
   ar: {
     // ================= NAV =================
-    nav_try: "جرّب الآن",
-    nav_how: "كيف تعمل",
-    nav_build: "ابدأ السيرة",
+        nav_try: "جرّب الآن",
+        nav_how: "كيف تعمل",
+        nav_build: "ابدأ السيرة",
+
+        // Auth (Navbar)
+        nav_signin: "تسجيل الدخول",
+        nav_signup: "إنشاء حساب",
+        nav_logout: "تسجيل الخروج",
+        nav_hi: "أهلًا",
 
     // ================= HERO =================
     hero_pill: "ذكاء عملي لمسارك المهني",
